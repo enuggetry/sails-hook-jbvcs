@@ -1,19 +1,23 @@
 {
-  "name": "sails-hook-jbvcs",
-  "version": "0.0.0",
-  "description": "Installable Sails.js hook to facilitate GitHub based Version Control for genome sequences",
-  "main": "index.js",
-  "author": "Saksham Saxena",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
-  },
-  "sails": {
-    "isHook": true
-  },
-  "dependencies": {
-    "grunt-shell-spawn": "^0.3.10",
-    "nodegit": "^0.13.0"
-  }
+	"name": "sails-hook-jbvcs",
+	"version": "0.0.0",
+	"description": "Installable Sails.js hook to facilitate GitHub based Version Control for genome sequences",
+	"main": "index.js",
+	"author": "Saksham Saxena",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
+	},
+	"sails": {
+		"isHook": true
+	},
+	"dependencies": {
+		"grunt-shell-spawn": "^0.3.10",
+		"jquery": "^2.2.4",
+		"nodegit": "^0.13.0"
+	},
+	"devDependencies": {
+		"sails": "~0.11.0"
+	}
 }
