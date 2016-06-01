@@ -5,8 +5,10 @@ Sails hook which :
 --> Creates a directory
 --> Pulls a repo's specific branch to that directory
 */
-
-var $ = require('jquery');
+var jsdom = require('jsdom');
+var doc = jsdom.jsdom("<html><body></body></html>");
+var window = doc.parentWindow;
+var $ = require('jquery')(window);
 
 module.exports = function jbvcs(sails) {
 
@@ -17,6 +19,17 @@ module.exports = function jbvcs(sails) {
 	*/
 
 	return {
+		isApiLive: function(cb) {
+			$.ajax({
+				url: 'https://status.github.com/api/status.json',
+				success: function(data) {
+					var status = data.status;
+					cb(null, status);
+				}
+			});
+			return true;
+		},
+
 		searchRepo: function(username, repository) {
 			if (typeof username !== "string")
 				username = username.toString();
