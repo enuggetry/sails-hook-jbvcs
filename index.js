@@ -27,7 +27,6 @@ module.exports = function jbvcs(sails) {
 					cb(null, status);
 				}
 			});
-			//return true;
 		},
 
 		searchRepo: function(username, repository, cb) {
@@ -37,7 +36,7 @@ module.exports = function jbvcs(sails) {
 				repository = repository.toString();
 
 			//Array containing relevant info of a repo in respective objects
-			var repoExists = 0;
+			var repoExists;
 			//Get the list of public repos of 'username'
 			$.ajax({
 				url: "https://api.github.com/users/" + username + "/repos",
@@ -46,32 +45,22 @@ module.exports = function jbvcs(sails) {
 				success: function(data) {
 					//iterate over each object in the data array
 					for (var i = 0; i < data.length; i++) {
-						//iterate over each key of object
+						//iterate over each key of object (repo)
 						for (var field in data[i]) {
-							//console.log(field);
-							//search only name to our own array
+							//search only name in current repo/object
 							if (field === "name") {
-								console.log((data[i])[field]);
-								if ((data[i])[field] === repository) {
-									//repo exists
+								if (((data[i])[field]).toString() == repository) {
 									repoExists = true;
-									// console.log("exists")
-									break;
+									cb(null, repoExists);
+									return;
 								} else {
 									repoExists = false;
-									// console.log("DOES NOTexists")
 								}
 							}
 						}
 					}
-					cb(null, repoExists);
 				},
-				/*error: function(xhr, err, errDetails) {
-					cb(errDetails, repoExists);
-					//console.log(this.url)
-				}*/
 			});
-			//return true;
 		}
 	};
 }
