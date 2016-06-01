@@ -49,9 +49,21 @@ describe('Basic Sails Test ::', function() {
 
 describe('Hook Tests ::', function() {
 
-	it('API Test', function() {
+	this.timeout(11000);
+
+	it('API Test', function(done) {
 		jbvcs().isApiLive(function(err, result) {
 			result.should.equal("good");
+			done();
 		});
-	})
+		
+	});
+
+	it('Repo Exists', function(done) {
+		jbvcs().searchRepo('sakshamsaxena', 'Marks', function(err, doesit) {
+			doesit.should.equal(true);
+			done();
+		});
+		
+	});
 });
