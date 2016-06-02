@@ -56,11 +56,10 @@ describe('Hook Tests ::', function() {
 			result.should.equal("good");
 			done();
 		});
-		
 	});
 
 	it('Repo Exists', function(done) {
-		jbvcs().searchRepo('sakshamsaxena', 'Marks', function(err, doesit) {
+		jbvcs().searchRepo('octocat', 'Hello-World', function(err, doesit) {
 			doesit.should.equal(true);
 			done();
 		});

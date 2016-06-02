@@ -6,11 +6,11 @@ Sails hook which :
 --> Pulls a repo's specific branch to that directory
 */
 var jsdom = require('jsdom');
-var doc = jsdom.jsdom("<html><body></body></html>");
+var doc = jsdom.jsdom('<html><body></body></html>');
 var window = doc.parentWindow;
 var $ = require('jquery')(window);
 
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 module.exports = function jbvcs(sails) {
 
@@ -23,10 +23,9 @@ module.exports = function jbvcs(sails) {
 	return {
 		isApiLive: function(cb) {
 			var xhr = new XMLHttpRequest();
-
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-					var status = JSON.parse(xhr.responseText).status;
+					var status = JSON.parse(xhr.responseText).status; //will be either "good", "minor", "major"
 					cb(null, status);
 				}
 			};
@@ -35,8 +34,8 @@ module.exports = function jbvcs(sails) {
 		},
 
 		searchRepo: function(username, repository, cb) {
-			var uri = "https://api.github.com/users/" + username + "/repos";
-			var repoExists;
+			var uri = 'https://api.github.com/users/' + username + '/repos';
+			var repoExists = null;
 			//Get the list of public repos of 'username'
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
@@ -48,18 +47,25 @@ module.exports = function jbvcs(sails) {
 						//iterate over each key of object (repo)
 						for (var field in data[i]) {
 							//search only name in current repo/object
-							if (field === "name") {
+							if (field === 'name') {
 								//got a match? return!
 								if (((data[i])[field]).toString() == repository) {
+									cb(null, true);
 									repoExists = true;
-									cb(null, repoExists);
 									return;
-								} else {
-									repoExists = false;
 								}
 							}
 						}
 					}
+					//case when repo isn't found
+					if(!repoExists) {
+						cb("Repository Not Found", false);
+					}
+				}
+				//case when username is wrong
+				if (xhr.status == 404) {
+					cb(xhr.statusText, false);
+					return;
 				}
 			};
 			xhr.open('GET', uri, true);
