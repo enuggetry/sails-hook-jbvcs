@@ -23,7 +23,7 @@ module.exports = function jbvcs(sails) {
 	return {
 		isApiLive: function(cb) {
 			var xhr = new XMLHttpRequest();
-			
+
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var status = JSON.parse(xhr.responseText).status;
@@ -35,25 +35,21 @@ module.exports = function jbvcs(sails) {
 		},
 
 		searchRepo: function(username, repository, cb) {
-			if (typeof username !== "string")
-				username = username.toString();
-			if (typeof repository !== "string")
-				repository = repository.toString();
-
-			//Array containing relevant info of a repo in respective objects
+			var uri = "https://api.github.com/users/" + username + "/repos";
 			var repoExists;
 			//Get the list of public repos of 'username'
-			$.ajax({
-				url: "https://api.github.com/users/" + username + "/repos",
-				method: "GET",
-				dataType: "json",
-				success: function(data) {
-					//iterate over each object in the data array
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					//Get it in JSON
+					var data = JSON.parse(xhr.responseText);
+					//iterate over each object (repo)
 					for (var i = 0; i < data.length; i++) {
 						//iterate over each key of object (repo)
 						for (var field in data[i]) {
 							//search only name in current repo/object
 							if (field === "name") {
+								//got a match? return!
 								if (((data[i])[field]).toString() == repository) {
 									repoExists = true;
 									cb(null, repoExists);
@@ -64,8 +60,10 @@ module.exports = function jbvcs(sails) {
 							}
 						}
 					}
-				},
-			});
+				}
+			};
+			xhr.open('GET', uri, true);
+			xhr.send();
 		}
 	};
 }
