@@ -22,6 +22,7 @@
     "mocha": "^2.5.3",
     "sails": "~0.11.0",
     "should": "^9.0.0",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "xmlhttprequest": "^1.8.0"
   }
 }

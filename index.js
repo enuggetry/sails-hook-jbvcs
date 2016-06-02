@@ -10,6 +10,8 @@ var doc = jsdom.jsdom("<html><body></body></html>");
 var window = doc.parentWindow;
 var $ = require('jquery')(window);
 
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
 module.exports = function jbvcs(sails) {
 
 	/*
@@ -20,13 +22,16 @@ module.exports = function jbvcs(sails) {
 
 	return {
 		isApiLive: function(cb) {
-			$.ajax({
-				url: 'https://status.github.com/api/status.json',
-				success: function(data) {
-					var status = data.status;
+			var xhr = new XMLHttpRequest();
+			
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var status = JSON.parse(xhr.responseText).status;
 					cb(null, status);
 				}
-			});
+			};
+			xhr.open('GET', 'https://status.github.com/api/status.json', true);
+			xhr.send();
 		},
 
 		searchRepo: function(username, repository, cb) {
