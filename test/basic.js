@@ -52,15 +52,15 @@ describe('Hook Tests ::', function() {
 	this.timeout(11000);
 
 	it('API Test', function(done) {
-		jbvcs().isApiLive(function(err, result) {
-			result.should.equal("good");
+		jbvcs().isApiLive(function(err, isIt) {
+			isIt.should.equal(true);
 			done();
 		});
 	});
 
 	it('Repo Exists', function(done) {
-		jbvcs().searchRepo('octocat', 'Hello-World', function(err, doesit) {
-			doesit.should.equal(true);
+		jbvcs().searchRepo('octocat', 'Hello-World', function(err, foundIt) {
+			foundIt.should.equal(true);
 			done();
 		});
 		

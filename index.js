@@ -1,6 +1,6 @@
 /*
 Sails hook which :
---> Searches for a repo
+--> Searches for a repo {done}
 --> Gets a list of branches and tags
 --> Creates a directory
 --> Pulls a repo's specific branch to that directory
@@ -26,7 +26,10 @@ module.exports = function jbvcs(sails) {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var status = JSON.parse(xhr.responseText).status; //will be either "good", "minor", "major"
-					cb(null, status);
+					if(status === "good")
+						cb(null, true);
+					else
+						cb("API is down", false);
 				}
 			};
 			xhr.open('GET', 'https://status.github.com/api/status.json', true);
