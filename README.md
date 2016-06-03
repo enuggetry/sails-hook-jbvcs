@@ -6,6 +6,13 @@ var jbvcs = sails.hook.jbvcs;
 jbvcs.isApiLive(function(err, isIt) {
 	if(isIt) {
 		//API is up. We can do something now
+		searchRepo("foo", "bar", function(err, foundIt) {
+			if(foundIt) {
+				//Repo exists. Fetch more stuff of the repo.
+			}
+			else
+				throw err;
+		})
 	}
 	else
 		throw err;

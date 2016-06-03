@@ -1,24 +1,17 @@
 /*
 Sails hook which :
 --> Searches for a repo {done}
---> Gets a list of branches and tags
+--> Gets a list of branches and tags {have the urls now}
 --> Creates a directory
---> Pulls a repo's specific branch to that directory
+--> Pulls a repo's specific branch to that directory (nodegit)
 */
-var jsdom = require('jsdom');
-var doc = jsdom.jsdom('<html><body></body></html>');
-var window = doc.parentWindow;
-var $ = require('jquery')(window);
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 module.exports = function jbvcs(sails) {
 
-	/*
-	Need some info :
-	--> Username, to get the public repo list
-	--> Repo name, to search for it
-	*/
+	//To keep the info of interested repo for further usage
+	var repoInfo = {};
 
 	return {
 		isApiLive: function(cb) {
@@ -26,7 +19,7 @@ module.exports = function jbvcs(sails) {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var status = JSON.parse(xhr.responseText).status; //will be either "good", "minor", "major"
-					if(status === "good")
+					if (status === "good")
 						cb(null, true);
 					else
 						cb("API is down", false);
@@ -55,13 +48,21 @@ module.exports = function jbvcs(sails) {
 								if (((data[i])[field]).toString() == repository) {
 									cb(null, true);
 									repoExists = true;
+									repoInfo.name = data[i].name;
+									repoInfo.full_name = data[i].full_name;
+									repoInfo.fork = data[i].fork;
+									repoInfo.tags_url = data[i].tags_url; //list all tags
+									repoInfo.branches_url = data[i].branches_url.substr(0, data[i].branches_url.length - 9); //list all branches
+									repoInfo.created_at = data[i].created_at;
+									repoInfo.pushed_at = data[i].pushed_at;
+									repoInfo.updated_at = data[i].updated_at;
 									return;
 								}
 							}
 						}
 					}
 					//case when repo isn't found
-					if(!repoExists) {
+					if (!repoExists) {
 						cb("Repository Not Found", false);
 					}
 				}
