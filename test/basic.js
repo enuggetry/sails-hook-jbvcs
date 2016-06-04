@@ -1,6 +1,5 @@
 var Sails = require('sails').Sails;
 var jbvcs = require('../index.js');
-var sinon = require('sinon');
 var should = require('should');
 
 describe('Basic Sails Test ::', function() {
@@ -59,10 +58,11 @@ describe('Hook Tests ::', function() {
 	});
 
 	it('Repo Exists', function(done) {
-		jbvcs().searchRepo('octocat', 'Hello-World', function(err, foundIt) {
+		jbvcs().searchRepo('sakshamsaxena', 'jbrowse', function(err, foundIt) {
 			foundIt.should.equal(true);
 			done();
+			//If the repo exists, we get a tag list for sure.
 		});
-		
 	});
+
 });

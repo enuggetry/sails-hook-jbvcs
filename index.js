@@ -1,9 +1,10 @@
 /*
 Sails hook which :
 --> Searches for a repo {done}
---> Gets a list of tags {have the urls now}
---> Creates a directory (fs)
---> Pulls a repo's specific branch to that directory (nodegit)
+--> Gets a list of tags {done}
+--> Compare with latest local
+--> Creates a directory to pull new stuff into(fs)
+--> Pulls a repo's specific tag to that directory (nodegit)
 */
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
@@ -12,6 +13,24 @@ module.exports = function jbvcs(sails) {
 
 	//To keep the info of interested repo for further usage
 	var repoInfo = {};
+	var latestTagRemote = {};
+
+	function fetchTags(cb) {
+		//You've the tags url. Fetch a good list
+		//returns latest tag
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var data = JSON.parse(xhr.responseText);
+				latestTagRemote.name = (data[0]).name;
+				latestTagRemote.commit = (data[0]).commit.sha;
+				latestTagRemote.zipUri = (data[0]).zipball_url;
+				cb();
+			}
+		}
+		xhr.open('GET', repoInfo.tags_url, true);
+		xhr.send();
+	}
 
 	return {
 		isApiLive: function(cb) {
@@ -46,7 +65,6 @@ module.exports = function jbvcs(sails) {
 							if (field === 'name') {
 								//got a match? return!
 								if (((data[i])[field]).toString() == repository) {
-									cb(null, true);
 									repoExists = true;
 									repoInfo.name = data[i].name;
 									repoInfo.full_name = data[i].full_name;
@@ -56,6 +74,9 @@ module.exports = function jbvcs(sails) {
 									repoInfo.created_at = data[i].created_at;
 									repoInfo.pushed_at = data[i].pushed_at;
 									repoInfo.updated_at = data[i].updated_at;
+									fetchTags(function() {
+										cb(null, true);
+									});
 									return;
 								}
 							}
