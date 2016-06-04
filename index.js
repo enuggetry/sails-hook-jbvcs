@@ -1,8 +1,8 @@
 /*
 Sails hook which :
 --> Searches for a repo {done}
---> Gets a list of branches and tags {have the urls now}
---> Creates a directory
+--> Gets a list of tags {have the urls now}
+--> Creates a directory (fs)
 --> Pulls a repo's specific branch to that directory (nodegit)
 */
 

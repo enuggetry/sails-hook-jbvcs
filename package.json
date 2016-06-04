@@ -1,28 +1,26 @@
 {
-  "name": "sails-hook-jbvcs",
-  "version": "0.0.0",
-  "description": "Installable Sails.js hook to facilitate GitHub based Version Control for genome sequences",
-  "main": "index.js",
-  "author": "Saksham Saxena",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
-  },
-  "scripts": {
-    "test": "node_modules/.bin/mocha -w"
-  },
-  "sails": {
-    "isHook": true
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "jquery": "^2.2.4",
-    "jsdom": "^3.1.2",
-    "mocha": "^2.5.3",
-    "sails": "~0.11.0",
-    "should": "^9.0.0",
-    "sinon": "^1.17.4",
-    "xmlhttprequest": "^1.8.0"
-  }
+	"name": "sails-hook-jbvcs",
+	"version": "0.0.0",
+	"description": "Installable Sails.js hook to facilitate GitHub based Version Control for genome sequences",
+	"main": "index.js",
+	"author": "Saksham Saxena",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
+	},
+	"scripts": {
+		"test": "node_modules/.bin/mocha -w"
+	},
+	"sails": {
+		"isHook": true
+	},
+	"dependencies": {
+		"mocha": "^2.5.3",
+		"sails": "~0.11.0",
+		"should": "^9.0.0",
+		"sinon": "^1.17.4",
+		"xmlhttprequest": "^1.8.0"
+	},
+	"devDependencies": {}
 }
