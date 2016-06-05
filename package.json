@@ -10,7 +10,7 @@
     "url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha -w"
+    "test": "node_modules/.bin/mocha -w",
   },
   "sails": {
     "isHook": true
