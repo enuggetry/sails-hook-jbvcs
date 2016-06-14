@@ -1,5 +1,5 @@
 var Sails = require('sails').Sails;
-var jbvcs = require('../index.js');
+var jbvcs = require('../lib/index.js');
 var should = require('should');
 
 describe('Basic Sails Test ::', function() {
@@ -17,7 +17,7 @@ describe('Basic Sails Test ::', function() {
 		Sails().lift({
 			hooks: {
 				// Load the hook
-				"jbvcs": require('../'),
+				"jbvcs": require('../lib/'),
 				// Skip grunt (unless your hook uses it)
 				"grunt": false
 			},
