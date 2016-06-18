@@ -30,7 +30,7 @@ jbvcs.isApiLive(function(err, isIt) {
 
 ### API
 
-Read it on the [Wiki](./wiki).
+Read it on the [Wiki](../../wiki).
 
 ### Testing
 Run tests once after clone/install with ```mocha```.

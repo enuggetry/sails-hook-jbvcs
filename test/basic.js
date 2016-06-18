@@ -48,7 +48,7 @@ describe('Basic Sails Test ::', function() {
 
 describe('Hook Tests ::', function() {
 
-	this.timeout(11000);
+	this.timeout(31000);
 
 	it('API Test', function(done) {
 		jbvcs().isApiLive(function(err, isIt) {
@@ -61,8 +61,14 @@ describe('Hook Tests ::', function() {
 		jbvcs().searchRepo('sakshamsaxena', 'jbrowse', function(err, foundIt) {
 			foundIt.should.equal(true);
 			done();
-			//If the repo exists, we get a tag list for sure.
 		});
 	});
+
+	it('Able to read local repo', function(done) {
+		jbvcs().compareTags(function(err, res) {
+			res.should.equal(true);
+			done();
+		});
+	})
 
 });
