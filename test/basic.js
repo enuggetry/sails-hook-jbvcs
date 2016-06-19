@@ -2,6 +2,12 @@ var Sails = require('sails').Sails;
 var jbvcs = require('../lib/index.js');
 var should = require('should');
 
+const readline = require('readline');
+const rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout
+});
+
 describe('Basic Sails Test ::', function() {
 
 	// Var to hold a running sails app instance
@@ -48,23 +54,32 @@ describe('Basic Sails Test ::', function() {
 
 describe('Hook Tests ::', function() {
 
-	this.timeout(31000);
-
 	it('API Test', function(done) {
+		this.timeout(3000);
 		jbvcs().isApiLive(function(err, isIt) {
 			isIt.should.equal(true);
 			done();
 		});
 	});
 
-	it('Repo Exists', function(done) {
-		jbvcs().searchRepo('sakshamsaxena', 'jbrowse', function(err, foundIt) {
-			foundIt.should.equal(true);
-			done();
+	it('Repo Exists on GitHub', function(done) {
+		this.timeout(0);
+		var info = {};
+		rl.question('\n  GitHub username : ', (answer) => {
+			info.username = answer;
+			rl.question('  Repository : ', (answer) => {
+				info.repo = answer;
+				rl.close();
+				jbvcs().searchRepo(info.username, info.repo, function(err, foundIt) {
+					foundIt.should.equal(true);
+					done();
+				});
+			});
 		});
 	});
 
-	it('Able to read local repo', function(done) {
+	it('Is Able to read local repo', function(done) {
+		this.timeout(1000);
 		jbvcs().compareTags(function(err, res) {
 			res.should.equal(true);
 			done();
