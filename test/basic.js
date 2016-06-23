@@ -57,7 +57,7 @@ describe('Hook Tests ::', function() {
 		});
 	});
 
-	it('Search Repo', function(done) {
+	it('Search For Repo', function(done) {
 		this.timeout(0);
 		jbvcs().searchRepo('sakshamsaxena', 'Presentem', function(err, foundIt) {
 			foundIt.should.equal(true);
