@@ -59,7 +59,7 @@ describe('Hook Tests ::', function() {
 
 	it('Search Repo', function(done) {
 		this.timeout(0);
-		jbvcs().searchRepo('sakshamsaxena', 'jbrowse', function(err, foundIt) {
+		jbvcs().searchRepo('sakshamsaxena', 'Presentem', function(err, foundIt) {
 			foundIt.should.equal(true);
 			done();
 		});
@@ -67,7 +67,7 @@ describe('Hook Tests ::', function() {
 
 	it('Cloning', function(done) {
 		this.timeout(0);
-		jbvcs().cloneTags(4, function(err, res) {
+		jbvcs().cloneTags(2, function(err, res) {
 			res.should.equal(true);
 			done();
 		});
