@@ -57,12 +57,20 @@ describe('Hook Tests ::', function() {
 		});
 	});
 
-	it('Is Able to read local repo', function(done) {
-		this.timeout(500);
-		jbvcs().compareTags(function(err, res) {
+	it('Search Repo', function(done) {
+		this.timeout(0);
+		jbvcs().searchRepo('sakshamsaxena', 'jbrowse', function(err, foundIt) {
+			foundIt.should.equal(true);
+			done();
+		});
+	});
+
+	it('Cloning', function(done) {
+		this.timeout(0);
+		jbvcs().cloneTags(4, function(err, res) {
 			res.should.equal(true);
 			done();
 		});
-	})
+	});
 
 });
