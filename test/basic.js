@@ -1,6 +1,8 @@
 var Sails = require('sails').Sails;
 var should = require('should');
 
+const path = require('path');
+const exec = require('child_process').exec;
 const jbvcs = require('../lib/index.js');
 
 describe('Basic Sails Test ::', function() {
@@ -69,7 +71,11 @@ describe('Hook Tests ::', function() {
 		this.timeout(0);
 		jbvcs().cloneTags(2, function(err, res) {
 			res.should.equal(true);
-			done();
+			var clone_path = path.resolve(__dirname, '../../../Versions');
+			exec('rm -rf '+ clone_path, function () {
+				console.log("Cleaned up.")
+				done();
+			});
 		});
 	});
 
