@@ -14,10 +14,18 @@ jbvcs.isApiLive(function(err, isIt) {
 	if(isIt) {
 		//API is up. We can do something now
 		//Or just say "Yipee!"
-		searchRepo("foo", "bar", function(err, foundIt) {
+		jbvcs.searchRepo("foo", "bar", function(err, foundIt) {
 			if(foundIt) {
 				//Repo exists. Do stuff now.
 				//Or just say "Woweee!"
+				jbvcs.cloneTags(info.how, function(err, done) {
+					if(done) {
+						//Tags are cloned into respective folders. 
+						//Entertain user maybe?
+					}
+					else
+						throw err;
+				})
 			}
 			else
 				throw err;
