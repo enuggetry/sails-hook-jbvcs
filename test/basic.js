@@ -53,8 +53,8 @@ describe('Hook Tests ::', function() {
 
 	it('API Test', function(done) {
 		this.timeout(2000);
-		jbvcs().isApiLive(function(err, isIt) {
-			isIt.should.equal(true);
+		jbvcs().isApiLive().then(function (val) {
+			val.should.equal(true);
 			done();
 		});
 	});
