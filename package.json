@@ -1,6 +1,6 @@
 {
   "name": "sails-hook-jbvcs",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "Installable Sails.js hook to facilitate GitHub based Version Control for genome sequences",
   "main": "./lib/index.js",
   "author": "Saksham Saxena",
@@ -23,8 +23,7 @@
     "mocha": "^2.5.3",
     "sails": "~0.11.0",
     "should": "^9.0.0",
-    "sinon": "^1.17.4",
-    "xmlhttprequest": "^1.8.0"
+    "superagent": "^2.0.0"
   },
   "devDependencies": {}
 }
