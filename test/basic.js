@@ -53,10 +53,10 @@ describe('Hook Tests ::', function() {
 
 	it('API Test', function(done) {
 		this.timeout(2000);
-		jbvcs().isApiLive().then(function (val) {
+		jbvcs().isApiLive().then(function(val) {
 			val.should.equal(true);
 			done();
-		}).catch(function (err) {
+		}).catch(function(err) {
 			throw err;
 			done();
 		});
@@ -64,10 +64,10 @@ describe('Hook Tests ::', function() {
 
 	it('Search For Repo', function(done) {
 		this.timeout(0);
-		jbvcs().searchRepo('sakshamsaxena', 'Presentem').then(function(foundIt) {
+		jbvcs().searchRepo('sakshamsaxena', 'sails-hook-boilerplate').then(function(foundIt) {
 			foundIt.should.equal(true);
 			done();
-		}).catch(function (err) {
+		}).catch(function(err) {
 			throw err;
 			done();
 		});
@@ -75,21 +75,20 @@ describe('Hook Tests ::', function() {
 
 	it('Cloning', function(done) {
 		this.timeout(0);
-		jbvcs().cloneTags(1).then(function(res) {
+		jbvcs().cloneTags(2).then(function(res) {
 			res.should.equal(true);
 			done();
-			/*console.log("here");
-			var clone_path = path.resolve(__dirname, '../../../Versions');
-			exec('rm -rf '+ clone_path, function (error, stdout, stderr) {
-				if(error || stderr) throw error||stderr
-				console.log("Cleaned up.");
-				res.should.equal(true);
-				done();
-			});*/
-		}).catch(function (err) {
+		}).catch(function(err) {
 			throw err;
 			done();
 		});
 	});
 
+	it('Cleans up', function(done) {
+		var clone_path = path.resolve(__dirname, '../../../Versions');
+		exec('rm -rf ' + clone_path, function(error, stdout, stderr) {
+			console.log("Cleaned up.");
+			done();
+		});
+	})
 });
