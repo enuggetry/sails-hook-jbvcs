@@ -9,13 +9,17 @@
     "type": "git",
     "url": "git+https://github.com/sakshamsaxena/sails-hook-jbvcs.git"
   },
+  "bin": {
+    "jbvcs": "./lib/cli.js"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -w"
   },
   "sails": {
     "isHook": true
   },
   "dependencies": {
+    "chalk": "^1.1.3",
     "mocha": "^2.5.3",
     "sails": "~0.11.0",
     "should": "^9.0.0",
