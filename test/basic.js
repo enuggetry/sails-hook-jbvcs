@@ -75,13 +75,20 @@ describe('Hook Tests ::', function() {
 
 	it('Cloning', function(done) {
 		this.timeout(0);
-		jbvcs().cloneTags(2, function(err, res) {
+		jbvcs().cloneTags(1).then(function(res) {
 			res.should.equal(true);
+			done();
+			/*console.log("here");
 			var clone_path = path.resolve(__dirname, '../../../Versions');
-			exec('rm -rf '+ clone_path, function () {
-				console.log("Cleaned up.")
+			exec('rm -rf '+ clone_path, function (error, stdout, stderr) {
+				if(error || stderr) throw error||stderr
+				console.log("Cleaned up.");
+				res.should.equal(true);
 				done();
-			});
+			});*/
+		}).catch(function (err) {
+			throw err;
+			done();
 		});
 	});
 
