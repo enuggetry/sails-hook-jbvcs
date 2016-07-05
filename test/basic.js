@@ -75,8 +75,9 @@ describe('Hook Tests ::', function() {
 
 	it('Cloning', function(done) {
 		this.timeout(0);
-		jbvcs().cloneTags(2).then(function(res) {
-			res.should.equal(true);
+		jbvcs().cloneTags(2).then(function(cloned, notcloned) {
+			console.log("Ab jaake complete hona chahiye");
+			cloned.should.be.equal(true);
 			done();
 		}).catch(function(err) {
 			throw err;
@@ -87,7 +88,6 @@ describe('Hook Tests ::', function() {
 	it('Cleans up', function(done) {
 		var clone_path = path.resolve(__dirname, '../../../Versions');
 		exec('rm -rf ' + clone_path, function(error, stdout, stderr) {
-			console.log("Cleaned up.");
 			done();
 		});
 	})

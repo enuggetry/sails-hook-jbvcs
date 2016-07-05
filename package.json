@@ -13,7 +13,7 @@
     "jbvcs": "./lib/cli.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -w"
   },
   "sails": {
     "isHook": true
