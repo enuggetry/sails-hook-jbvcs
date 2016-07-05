@@ -10,22 +10,24 @@ Async nature of the hook helps in performing other stuff as well in the callback
 
 ```javascript
 var jbvcs = sails.hook.jbvcs;
-jbvcs.isApiLive(function(err, isIt) {
-	if(isIt) {
+jbvcs.isApiLive()
+	.then(function(isIt) {
 		//API is up. We can do something now
 		//Or just say "Yipee!"
-		searchRepo("foo", "bar", function(err, foundIt) {
-			if(foundIt) {
-				//Repo exists. Do stuff now.
-				//Or just say "Woweee!"
-			}
-			else
-				throw err;
-		})
-	}
-	else
-		throw err;
-});
+
+		return seachRepo("foo", "bar")
+	})
+	.then(function(foundIt) {
+		//Repo exists. Do stuff now.
+		//Or just say "Woweee!"
+
+		return cloneTags(n)
+	})
+	.then(function(done) {
+		//CLoning done!
+		return true;
+	});
+
 ```
 
 ### API

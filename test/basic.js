@@ -56,13 +56,19 @@ describe('Hook Tests ::', function() {
 		jbvcs().isApiLive().then(function (val) {
 			val.should.equal(true);
 			done();
+		}).catch(function (err) {
+			throw err;
+			done();
 		});
 	});
 
 	it('Search For Repo', function(done) {
 		this.timeout(0);
-		jbvcs().searchRepo('sakshamsaxena', 'Presentem', function(err, foundIt) {
+		jbvcs().searchRepo('sakshamsaxena', 'Presentem').then(function(foundIt) {
 			foundIt.should.equal(true);
+			done();
+		}).catch(function (err) {
+			throw err;
 			done();
 		});
 	});
