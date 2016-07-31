@@ -51,6 +51,14 @@ describe('Basic Sails Test ::', function() {
 
 describe('Hook Tests ::', function() {
 
+	it('Git Test', function(done) {
+		this.timeout(0);
+		exec('git --version', function(error, stdout, stderr) {
+			if(!stderr)
+				done();
+		});
+	});
+
 	it('API Test', function(done) {
 		this.timeout(2000);
 		jbvcs().isApiLive().then(function(val) {
@@ -85,7 +93,7 @@ describe('Hook Tests ::', function() {
 	});
 
 	it('Cleans up', function(done) {
-		var clone_path = path.resolve(__dirname, '../../../Versions');
+		var clone_path = path.resolve('/var/www/jbrowse/versions/');
 		exec('rm -rf ' + clone_path, function(error, stdout, stderr) {
 			done();
 		});
