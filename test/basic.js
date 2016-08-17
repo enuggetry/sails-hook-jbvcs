@@ -72,7 +72,7 @@ describe('Hook Tests ::', function() {
 
 	it('Search For Repo', function(done) {
 		this.timeout(0);
-		jbvcs().searchRepo('sakshamsaxena', 'sails-hook-boilerplate').then(function(foundIt) {
+		jbvcs().searchRepo('sakshamsaxena', 'jbvcs-test').then(function(foundIt) {
 			foundIt.should.equal(true);
 			done();
 		}).catch(function(err) {
@@ -83,7 +83,7 @@ describe('Hook Tests ::', function() {
 
 	it('Cloning', function(done) {
 		this.timeout(0);
-		jbvcs().cloneTags(2).then(function(cloned, notcloned) {
+		jbvcs().cloneTags(0).then(function(cloned, notcloned) {
 			cloned.should.be.equal(true);
 			done();
 		}).catch(function(err) {

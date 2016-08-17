@@ -6,7 +6,7 @@ Async nature of the hook implemented through ES6 Promises delivers reliable perf
 
 ### Usage
 
-Can be directly invoked through the CLI.  
+Can be directly invoked through the _CLI_.  
 
 ```javascript
 npm install -g sails-hook-jbvcs
@@ -14,7 +14,7 @@ jbvcs
 ```
 This would then output the usage help.
 
-For usage in Sails project, read the [API Documentation](../../wiki).
+For _usage in Sails project_, read the [API Documentation](../../wiki).
 
 ### API
 
